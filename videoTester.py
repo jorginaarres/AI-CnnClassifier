@@ -4,9 +4,9 @@ from keras.models import model_from_json
 from keras.preprocessing import image
 
 # load model
-model = model_from_json(open("AIModel3.json", "r").read())
+model = model_from_json(open("AIModelv3.json", "r").read())
 # load weights
-model.load_weights('AIModel3.h5')
+model.load_weights('AIModelv3.h5')
 
 face_haar_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 
@@ -26,7 +26,8 @@ while True:
         roi_gray = cv2.resize(roi_gray, (48, 48))
         img_pixels = image.img_to_array(roi_gray)
         img_pixels = np.expand_dims(img_pixels, axis=0)
-        img_pixels /= 255
+        #img_pixels /= 255
+        #uncoment if expected predict are normalized pixels
 
         predictions = model.predict(img_pixels)
 
